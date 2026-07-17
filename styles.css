@@ -177,3 +177,15 @@ h2 { font-size: clamp(1.7rem, 2.8vw, 2.3rem); }
 }
 .talkie-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-2); margin-left: 2px; vertical-align: text-bottom; animation: blink 0.7s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+.match-search-box { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.match-search-box input { flex: 1; min-width: 200px; border-radius: 999px; border: 1px solid var(--border); padding: 12px 16px; background: rgba(255,255,255,0.06); color: white; font-size: 0.95rem; }
+.match-search-box input::placeholder { color: var(--muted); }
+.match-search-box button { border: 0; border-radius: 999px; padding: 12px 20px; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04111d; cursor: pointer; white-space: nowrap; }
+.summary-btn { margin-top: 10px; border: 1px solid rgba(119,221,255,0.3); background: rgba(119,221,255,0.08); color: var(--accent-2); padding: 8px 14px; border-radius: 999px; cursor: pointer; font-size: 0.82rem; font-weight: 700; transition: background 0.2s; }
+.summary-btn:hover { background: rgba(119,221,255,0.18); }
+.summary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.summary-box { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+.summary-box.open { max-height: 300px; margin-top: 12px; padding: 14px; background: rgba(79,140,255,0.08); border: 1px solid rgba(79,140,255,0.2); border-radius: 14px; }
+.talkie-thinking { color: var(--muted); font-style: italic; animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }

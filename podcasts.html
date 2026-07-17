@@ -112,17 +112,22 @@
             <p>Choose your focus and we’ll surface the most relevant episode in seconds.</p>
           </div>
           <div class="ai-panel">
-            <div class="ai-controls" aria-label="AI recommendation options">
-              <button class="ai-pill active" type="button" data-ai-goal="career-growth">Career growth</button>
-              <button class="ai-pill" type="button" data-ai-goal="leadership">Leadership</button>
-              <button class="ai-pill" type="button" data-ai-goal="technology">Technology</button>
+            <div class="match-search-box">
+              <input id="match-input" type="text" placeholder="e.g. I want to get into a big tech company..." />
+              <button id="match-btn" type="button">Match me</button>
             </div>
-            <div class="ai-result">
+            <div class="ai-controls" aria-label="AI recommendation options">
+              <button class="ai-pill active" type="button">Career growth</button>
+              <button class="ai-pill" type="button">Leadership</button>
+              <button class="ai-pill" type="button">Technology & Engineering</button>
+              <button class="ai-pill" type="button">First job advice</button>
+            </div>
+            <div class="ai-result" id="match-result">
               <div class="ai-badge">Recommended for you</div>
-              <h3 id="ai-title">Dream Your Career Into a Big MNC</h3>
-              <p id="ai-description">A smart pick if you want practical guidance for landing a strong first role.</p>
-              <div class="ai-meta" id="ai-meta">Guest: Bharat Chandra • Season 1 • 2024</div>
-              <a id="ai-link" href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch this episode</a>
+              <h3 id="ai-title">Loading best match...</h3>
+              <p id="ai-description"></p>
+              <div class="ai-meta" id="ai-meta"></div>
+              <a id="ai-link" href="#" target="_blank" rel="noreferrer">Watch this episode</a>
             </div>
           </div>
         </div>
@@ -141,7 +146,7 @@
             <button class="filter-chip" type="button" data-filter="technology">Technology</button>
           </div>
           <div class="card-grid episode-grid" id="episode-grid">
-            <article class="card featured-card" data-category="technology" data-guest="Sumanvitha KannamReddy" data-year="2024">
+            <article class="card featured-card" data-category="technology" data-guest="Sumanvitha KannamReddy" data-year="2024" data-id="aerospace">
               <img
                 src="https://img.youtube.com/vi/5oZ_GtRx6S0/hqdefault.jpg"
                 alt="The World of Aerospace podcast preview"
@@ -157,9 +162,11 @@
                 <p class="meta-line">Guest: Sumanvitha KannamReddy • Season 1 • 2024</p>
                 <p>Learn how careers in aerospace open up technical and strategic opportunities.</p>
                 <a href="https://www.youtube.com/watch?v=5oZ_GtRx6S0" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
               </div>
             </article>
-            <article class="card featured-card" data-category="career-growth" data-guest="Bharat Chandra" data-year="2024">
+            <article class="card featured-card" data-category="career-growth" data-guest="Bharat Chandra" data-year="2024" data-id="mnc">
               <img src="https://img.youtube.com/vi/hhckoit3fKk/hqdefault.jpg" alt="Dream Your Career Into a Big MNC podcast preview" />
               <div class="card-content">
                 <div class="card-topline">
@@ -170,9 +177,11 @@
                 <p class="meta-line">Guest: Bharat Chandra • Season 1 • 2024</p>
                 <p>An advice-driven episode on building strong career foundations in top tech companies.</p>
                 <a href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
               </div>
             </article>
-            <article class="card" data-category="leadership" data-guest="Talkiepedia Team" data-year="2024">
+            <article class="card" data-category="leadership" data-guest="Talkiepedia Team" data-year="2024" data-id="welcome">
               <img src="https://img.youtube.com/vi/rsG-bZZ4vCs/hqdefault.jpg" alt="Welcome to Talkiepedia podcast preview" />
               <div class="card-content">
                 <div class="card-topline">
@@ -183,9 +192,11 @@
                 <p class="meta-line">Guest: Talkiepedia Team • Season 1 • 2024</p>
                 <p>A warm introduction to the show and the career-focused conversations ahead.</p>
                 <a href="https://www.youtube.com/watch?v=rsG-bZZ4vCs" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
               </div>
             </article>
-            <article class="card" data-category="career-growth" data-guest="Bharat Chandra" data-year="2024">
+            <article class="card" data-category="career-growth" data-guest="Bharat Chandra" data-year="2024" data-id="bharat-reveal">
               <img src="https://img.youtube.com/vi/66OnXF2CFbo/hqdefault.jpg" alt="Bharat Chandra guest reveal preview" />
               <div class="card-content">
                 <div class="card-topline">
@@ -196,9 +207,11 @@
                 <p class="meta-line">Guest: Bharat Chandra • Season 1 • 2024</p>
                 <p>Insights into campus-to-career transitions and entrepreneurship.</p>
                 <a href="https://www.youtube.com/watch?v=66OnXF2CFbo" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
               </div>
             </article>
-            <article class="card" data-category="career-growth" data-guest="Nikhil" data-year="2024">
+            <article class="card" data-category="career-growth" data-guest="Nikhil" data-year="2024" data-id="first-job">
               <img src="https://img.youtube.com/vi/EuDHSBvjyTs/hqdefault.jpg" alt="First job choice episode preview" />
               <div class="card-content">
                 <div class="card-topline">
@@ -209,9 +222,11 @@
                 <p class="meta-line">Guest: Nikhil • Season 1 • 2024</p>
                 <p>A candid conversation with Nikhil about early-career decisions.</p>
                 <a href="https://www.youtube.com/watch?v=EuDHSBvjyTs" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
               </div>
             </article>
-            <article class="card" data-category="career-growth" data-guest="Talkiepedia Team" data-year="2024">
+            <article class="card" data-category="career-growth" data-guest="Talkiepedia Team" data-year="2024" data-id="trailer">
               <img src="https://img.youtube.com/vi/crGZlv2lyl0/hqdefault.jpg" alt="Trailer for Talkiepedia episode preview" />
               <div class="card-content">
                 <div class="card-topline">
@@ -222,6 +237,8 @@
                 <p class="meta-line">Guest: Talkiepedia Team • Season 1 • 2024</p>
                 <p>Trailer for an upcoming episode focused on first-job decisions.</p>
                 <a href="https://www.youtube.com/watch?v=crGZlv2lyl0" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
               </div>
             </article>
           </div>
