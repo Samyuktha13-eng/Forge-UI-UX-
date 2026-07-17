@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talkiepedia | Career podcasts and insights</title>
+    <meta name="description" content="Talkiepedia brings career-focused podcasts, expert interviews, and practical guidance for professionals." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <img src="./Home _ Talkiepedia_files/logo.png" alt="Talkiepedia logo" />
+          <span>Talkiepedia</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a class="active" href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="podcasts.html">Podcasts</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Career voices that lead</p>
+            <h1>Learn from real leaders, not just headlines.</h1>
+            <p class="hero-text">Explore thoughtful podcasts, practical career advice, and stories that help you grow with confidence.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="podcasts.html">Browse podcasts</a>
+              <a class="btn btn-secondary" href="contact.html">Contact us</a>
+            </div>
+            <div class="hero-stats">
+              <div><strong>100+</strong><span>Subscribers</span></div>
+              <div><strong>20+</strong><span>Episodes</span></div>
+              <div><strong>83+</strong><span>Followers</span></div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <img src="./Home _ Talkiepedia_files/microphone.jpg" alt="Talkiepedia podcast microphone" />
+            <div class="hero-card-content">
+              <h2>Ask TalkieAI</h2>
+              <label class="sr-only" for="ai-search">Ask TalkieAI</label>
+              <div class="search-box">
+                <input id="ai-search" type="text" placeholder="Ask anything about careers, AI, or podcasts" />
+                <button type="button" id="ai-search-btn">Ask</button>
+              </div>
+              <div class="ai-chips">
+                <button class="ai-quick-chip" data-q="How do I grow my career?">Career growth</button>
+                <button class="ai-quick-chip" data-q="What podcasts should I watch?">Podcasts</button>
+                <button class="ai-quick-chip" data-q="How to get into a big MNC?">Big MNC tips</button>
+              </div>
+              <div id="talkie-response" class="talkie-response" aria-live="polite" hidden></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Featured podcasts</p>
+            <h2>Most loved episodes</h2>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <img src="./Home _ Talkiepedia_files/collinionsaeroscope.png" alt="The World of Aerospace podcast cover" />
+              <div class="card-content">
+                <h3>The World of Aerospace</h3>
+                <p>Sumanvitha | Collins Aerospace</p>
+                <a href="https://www.youtube.com/watch?v=5oZ_GtRx6S0" target="_blank" rel="noreferrer">Watch episode</a>
+              </div>
+            </article>
+            <article class="card">
+              <img src="./Home _ Talkiepedia_files/podcast2.jpg" alt="Dream Your Career Into a Big MNC podcast cover" />
+              <div class="card-content">
+                <h3>Dream Your Career Into a Big MNC</h3>
+                <p>Bharat Chandra | Microsoft</p>
+                <a href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch episode</a>
+              </div>
+            </article>
+            <article class="card">
+              <img src="./Home _ Talkiepedia_files/trailer.png" alt="Navigating Corporate Success podcast cover" />
+              <div class="card-content">
+                <h3>Navigating Corporate Success</h3>
+                <p>Dhananjay Dubey | Forge Alumnus</p>
+                <a href="https://www.youtube.com/watch?v=rsG-bZZ4vCs" target="_blank" rel="noreferrer">Watch episode</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-preview">
+        <div class="container split-grid">
+          <div>
+            <p class="eyebrow">About us</p>
+            <h2>Turning insight into inspiration.</h2>
+            <p>Talkiepedia is a flagship initiative by Forge Alumnus, created to bridge the gap between aspiring professionals and the corporate world through meaningful conversations.</p>
+            <a class="btn btn-primary" href="about.html">Learn more</a>
+          </div>
+          <div>
+            <img src="./Home _ Talkiepedia_files/aboutus.jpg" alt="Podcast guests and hosts" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section newsletter-section">
+        <div class="container newsletter-card">
+          <div>
+            <p class="eyebrow">Stay in the loop</p>
+            <h2>Subscribe for the latest episodes</h2>
+            <p>Get fresh conversations, behind-the-scenes stories, and new episodes delivered straight to your inbox.</p>
+          </div>
+          <form class="newsletter-form">
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" type="email" placeholder="Your email" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Talkiepedia</h3>
+          <p>Real conversations for real career growth.</p>
+        </div>
+        <div>
+          <h4>Follow us</h4>
+          <div class="social-links">
+            <a href="https://www.youtube.com/@Talkiepedia" target="_blank" rel="noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/talkiepedia/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/in/dhananjay-dubey-35aa31169/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>talkiepedia@forgealumnus.com</p>
+          <p>+91 80-31411741</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

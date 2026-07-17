@@ -1,0 +1,48 @@
+$(function () {
+    $('.nav-btn').on('click', function () {
+        $(this).toggleClass('open');
+    });
+});
+
+function toggleTollFreeNumber(){
+  const pop = document.getElementById('tollFreePopup');
+  const bd = document.getElementById('tollFreeBackdrop');
+  const open = pop.style.display === 'block';
+  pop.style.display = open ? 'none' : 'block';
+  bd.style.display = open ? 'none' : 'block';
+}
+
+function closeTollFreePopup(){
+  document.getElementById('tollFreePopup').style.display = 'none';
+  document.getElementById('tollFreeBackdrop').style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  const icon = document.querySelector('.call-icon'),
+        pop = document.getElementById('tollFreePopup'),
+        bd = document.getElementById('tollFreeBackdrop');
+  if (!icon.contains(e.target) && !pop.contains(e.target)) {
+    pop.style.display = 'none';
+    bd.style.display = 'none';
+  }
+});
+
+   document.addEventListener('DOMContentLoaded', function () {
+    const modals = document.querySelectorAll('.modal');
+
+    modals.forEach(function (modalElement) {
+        modalElement.addEventListener('hidden.bs.modal', function () {
+            const iframe = modalElement.querySelector('iframe');
+            if (iframe) {
+                let src = iframe.src;
+
+                // Remove autoplay=1 from the URL
+                const url = new URL(src);
+                url.searchParams.set('autoplay', '0');
+
+                // Pause the video by resetting src without autoplay
+                iframe.src = url.toString();
+            }
+        });
+    });
+});

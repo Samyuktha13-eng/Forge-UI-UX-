@@ -1,0 +1,122 @@
+/* ============================================
+   TALKIEPEDIA IA — NAVIGATION STYLES
+   Extends design-system.css
+   ============================================ */
+
+/* ---- MEGA NAV DROPDOWN ---- */
+.nav-item { position: relative; }
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  padding: 8px;
+  z-index: 200;
+  animation: dropIn .15s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-item:hover .nav-dropdown,
+.nav-item:focus-within .nav-dropdown { display: block; }
+
+.nav-dropdown a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  text-decoration: none; font-size: .875rem; font-weight: 500;
+  color: var(--text-secondary); transition: all .15s;
+  white-space: nowrap;
+}
+.nav-dropdown a:hover { background: var(--primary-light); color: var(--primary); }
+.nav-dropdown a .dd-icon { font-size: .85rem; width: 18px; text-align: center; color: var(--text-muted); }
+.nav-dropdown a:hover .dd-icon { color: var(--primary); }
+
+/* Chevron on parent link */
+.nav-link-parent::after {
+  content: '▾';
+  font-size: .7rem;
+  margin-left: 4px;
+  opacity: .6;
+}
+
+/* ---- AI SEARCH BAR ---- */
+.ai-search-wrap {
+  flex: 1; max-width: 420px;
+  position: relative;
+}
+.ai-search-wrap input {
+  width: 100%; padding: 10px 44px 10px 16px;
+  border: 1.5px solid var(--border); border-radius: 50px;
+  font-family: var(--font); font-size: .875rem;
+  background: var(--bg); color: var(--text-primary);
+  transition: border-color .15s, box-shadow .15s;
+  outline: none;
+}
+.ai-search-wrap input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+.ai-search-wrap .search-btn {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  background: var(--primary); border: none; border-radius: 50px;
+  color: white; padding: 6px 14px; font-size: .8rem; font-weight: 600;
+  cursor: pointer; transition: background .15s;
+}
+.ai-search-wrap .search-btn:hover { background: var(--primary-dark); }
+
+/* ---- MOBILE HAMBURGER ---- */
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  padding: 8px; border-radius: var(--radius-sm); color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+/* ---- MOBILE DRAWER ---- */
+.mobile-drawer {
+  display: none; position: fixed; inset: 0; z-index: 300;
+}
+.drawer-backdrop {
+  position: absolute; inset: 0; background: rgba(0,0,0,.4);
+}
+.drawer-panel {
+  position: absolute; top: 0; left: 0; bottom: 0; width: 280px;
+  background: var(--white); padding: 24px 16px; overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+.drawer-panel.open { display: block; }
+.mobile-drawer.open { display: block; }
+
+.drawer-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px; font-weight: 600;
+}
+.drawer-section { margin-bottom: 8px; }
+.drawer-section-title {
+  font-size: .75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-muted); padding: 8px 12px 4px;
+}
+.drawer-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  text-decoration: none; font-size: .9rem; font-weight: 500;
+  color: var(--text-secondary); transition: all .15s;
+}
+.drawer-link:hover, .drawer-link.active {
+  background: var(--primary-light); color: var(--primary);
+}
+.drawer-link .dd-icon { font-size: .85rem; width: 18px; text-align: center; }
+
+@media (max-width: 900px) {
+  .nav-links, .ai-search-wrap { display: none !important; }
+  .hamburger { display: flex; }
+}

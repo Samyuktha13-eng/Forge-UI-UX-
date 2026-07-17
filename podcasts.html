@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podcasts | Talkiepedia</title>
+    <meta name="description" content="Browse Talks and episodes from Talkiepedia." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <img src="./Podcasts _ Talkiepedia_files/logo.png" alt="Talkiepedia logo" />
+          <span>Talkiepedia</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a class="active" href="podcasts.html">Podcasts</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero compact-hero">
+        <div class="container">
+          <p class="eyebrow">Podcasts</p>
+          <h1>Browse episodes by topic and interest.</h1>
+          <p>Use the categories below to quickly find episodes that match your career focus.</p>
+        </div>
+      </section>
+
+      <section class="section gallery-section">
+        <div class="container">
+          <div class="section-heading gallery-heading">
+            <div>
+              <p class="eyebrow">Team & gallery</p>
+              <h2>Meet the voices behind the show</h2>
+            </div>
+            <div class="gallery-controls" aria-label="Gallery controls">
+              <button class="gallery-btn" type="button" data-direction="prev" aria-label="Scroll left">←</button>
+              <button class="gallery-btn" type="button" data-direction="next" aria-label="Scroll right">→</button>
+            </div>
+          </div>
+          <div class="gallery-track" id="podcast-gallery-track">
+            <article class="gallery-card">
+              <img src="./Team _ Talkiepedia_files/dubey.jpeg" alt="Dhananjay Dubey" />
+              <div class="gallery-card-content">
+                <h3>Dhananjay Dubey</h3>
+                <p>Host & Founder of Talkiepedia</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="./Home _ Talkiepedia_files/sumanvitha.jpeg" alt="Sumanvitha KannamReddy" />
+              <div class="gallery-card-content">
+                <h3>Sumanvitha KannamReddy</h3>
+                <p>Podcast Guest & Aerospace Speaker</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="./Team _ Talkiepedia_files/vijay.jpeg" alt="Vijay Kumar Renikuntla" />
+              <div class="gallery-card-content">
+                <h3>Vijay Kumar Renikuntla</h3>
+                <p>Community Builder & Speaker</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="./Home _ Talkiepedia_files/bharat.jpeg" alt="Bharat Chandra" />
+              <div class="gallery-card-content">
+                <h3>Bharat Chandra</h3>
+                <p>Career Mentor & Microsoft Guest</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="./Team _ Talkiepedia_files/Vishnu_das.jpeg" alt="Vishnu Das" />
+              <div class="gallery-card-content">
+                <h3>Vishnu Das</h3>
+                <p>Conversation Partner & Mentor</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="./Home _ Talkiepedia_files/Harish.jpeg" alt="Harish Kotra" />
+              <div class="gallery-card-content">
+                <h3>Harish Kotra</h3>
+                <p>Community Voice & Guest Curator</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="./Team _ Talkiepedia_files/kiran.jpg" alt="Kiran Kumar" />
+              <div class="gallery-card-content">
+                <h3>Kiran Kumar</h3>
+                <p>Podcast Support & Growth Partner</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ai-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">AI matchmaker</p>
+            <h2>Let Talkie AI suggest the right conversation</h2>
+            <p>Choose your focus and we’ll surface the most relevant episode in seconds.</p>
+          </div>
+          <div class="ai-panel">
+            <div class="ai-controls" aria-label="AI recommendation options">
+              <button class="ai-pill active" type="button" data-ai-goal="career-growth">Career growth</button>
+              <button class="ai-pill" type="button" data-ai-goal="leadership">Leadership</button>
+              <button class="ai-pill" type="button" data-ai-goal="technology">Technology</button>
+            </div>
+            <div class="ai-result">
+              <div class="ai-badge">Recommended for you</div>
+              <h3 id="ai-title">Dream Your Career Into a Big MNC</h3>
+              <p id="ai-description">A smart pick if you want practical guidance for landing a strong first role.</p>
+              <div class="ai-meta" id="ai-meta">Guest: Bharat Chandra • Season 1 • 2024</div>
+              <a id="ai-link" href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch this episode</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Featured episodes</p>
+            <h2>Popular conversations</h2>
+          </div>
+          <div class="filter-row episode-filter-row" aria-label="Podcast category filters">
+            <button class="filter-chip active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="career-growth">Career growth</button>
+            <button class="filter-chip" type="button" data-filter="leadership">Leadership</button>
+            <button class="filter-chip" type="button" data-filter="technology">Technology</button>
+          </div>
+          <div class="card-grid episode-grid" id="episode-grid">
+            <article class="card featured-card" data-category="technology" data-guest="Sumanvitha KannamReddy" data-year="2024">
+              <img
+                src="https://img.youtube.com/vi/5oZ_GtRx6S0/hqdefault.jpg"
+                alt="The World of Aerospace podcast preview"
+                onerror="this.onerror=null;this.src='./Podcasts _ Talkiepedia_files/collinionsaeroscope.png';"
+                loading="lazy"
+              />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">Technology</p>
+                  <span class="pill pill-featured">Featured</span>
+                </div>
+                <h3>The World of Aerospace</h3>
+                <p class="meta-line">Guest: Sumanvitha KannamReddy • Season 1 • 2024</p>
+                <p>Learn how careers in aerospace open up technical and strategic opportunities.</p>
+                <a href="https://www.youtube.com/watch?v=5oZ_GtRx6S0" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+            </article>
+            <article class="card featured-card" data-category="career-growth" data-guest="Bharat Chandra" data-year="2024">
+              <img src="https://img.youtube.com/vi/hhckoit3fKk/hqdefault.jpg" alt="Dream Your Career Into a Big MNC podcast preview" />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">Career growth</p>
+                  <span class="pill pill-featured">Featured</span>
+                </div>
+                <h3>Dream Your Career Into a Big MNC</h3>
+                <p class="meta-line">Guest: Bharat Chandra • Season 1 • 2024</p>
+                <p>An advice-driven episode on building strong career foundations in top tech companies.</p>
+                <a href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+            </article>
+            <article class="card" data-category="leadership" data-guest="Talkiepedia Team" data-year="2024">
+              <img src="https://img.youtube.com/vi/rsG-bZZ4vCs/hqdefault.jpg" alt="Welcome to Talkiepedia podcast preview" />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">Leadership</p>
+                  <span class="pill">New</span>
+                </div>
+                <h3>Welcome to Talkiepedia</h3>
+                <p class="meta-line">Guest: Talkiepedia Team • Season 1 • 2024</p>
+                <p>A warm introduction to the show and the career-focused conversations ahead.</p>
+                <a href="https://www.youtube.com/watch?v=rsG-bZZ4vCs" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+            </article>
+            <article class="card" data-category="career-growth" data-guest="Bharat Chandra" data-year="2024">
+              <img src="https://img.youtube.com/vi/66OnXF2CFbo/hqdefault.jpg" alt="Bharat Chandra guest reveal preview" />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">Career growth</p>
+                  <span class="pill">Insight</span>
+                </div>
+                <h3>Guest Reveal #1: Bharat Chandra</h3>
+                <p class="meta-line">Guest: Bharat Chandra • Season 1 • 2024</p>
+                <p>Insights into campus-to-career transitions and entrepreneurship.</p>
+                <a href="https://www.youtube.com/watch?v=66OnXF2CFbo" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+            </article>
+            <article class="card" data-category="career-growth" data-guest="Nikhil" data-year="2024">
+              <img src="https://img.youtube.com/vi/EuDHSBvjyTs/hqdefault.jpg" alt="First job choice episode preview" />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">Career growth</p>
+                  <span class="pill">Advice</span>
+                </div>
+                <h3>Why Your First Job Choice Is Probably Wrong</h3>
+                <p class="meta-line">Guest: Nikhil • Season 1 • 2024</p>
+                <p>A candid conversation with Nikhil about early-career decisions.</p>
+                <a href="https://www.youtube.com/watch?v=EuDHSBvjyTs" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+            </article>
+            <article class="card" data-category="career-growth" data-guest="Talkiepedia Team" data-year="2024">
+              <img src="https://img.youtube.com/vi/crGZlv2lyl0/hqdefault.jpg" alt="Trailer for Talkiepedia episode preview" />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">Career growth</p>
+                  <span class="pill">Trailer</span>
+                </div>
+                <h3>Before You Choose Your First Job</h3>
+                <p class="meta-line">Guest: Talkiepedia Team • Season 1 • 2024</p>
+                <p>Trailer for an upcoming episode focused on first-job decisions.</p>
+                <a href="https://www.youtube.com/watch?v=crGZlv2lyl0" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Talkiepedia</h3>
+          <p>Real conversations for real career growth.</p>
+        </div>
+        <div>
+          <h4>Follow us</h4>
+          <div class="social-links">
+            <a href="https://www.youtube.com/@Talkiepedia" target="_blank" rel="noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/talkiepedia/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/in/dhananjay-dubey-35aa31169/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>talkiepedia@forgealumnus.com</p>
+          <p>+91 80-31411741</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
