@@ -4,8 +4,7 @@ const path = require('path');
 const app = express();
 
 if (!process.env.GROQ_API_KEY) {
-  console.error('ERROR: GROQ_API_KEY is missing from .env file');
-  process.exit(1);
+  console.warn('GROQ_API_KEY is missing; AI API endpoints will fail until it is set in Vercel environment variables.');
 }
 
 // Rate limiting — max 30 requests per minute per IP
@@ -33,6 +32,19 @@ app.use('/api', (req, res, next) => {
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.static(path.join(__dirname)));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'about.html'));
+});
+app.get('/podcasts', (req, res) => {
+  res.sendFile(path.join(__dirname, 'podcasts.html'));
+});
+app.get('/contact', (req, res) => {
+  res.sendFile(path.join(__dirname, 'contact.html'));
+});
 
 app.post('/api/chat', require('./api/chat'));
 app.post('/api/match', require('./api/match'));

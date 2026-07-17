@@ -27,12 +27,14 @@ async function fetchYouTubeVideos() {
 
   if (!key || !channelId) throw new Error('YouTube credentials missing');
 
-  const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelId}&part=snippet&order=date&maxResults=20&type=video`;
+  const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${key}&channelId=${channelId}&part=snippet&order=date&maxResults=50&type=video`;
   const data = await fetchJSON(searchUrl);
 
   if (!data.items || data.items.length === 0) throw new Error('No videos found');
 
-  const videos = data.items.map(item => ({
+  const videos = data.items
+    .filter(item => !/\bshorts?\b/i.test(item.snippet.title) && !/\/shorts\//i.test(item.snippet.description))
+    .map(item => ({
     id: item.id.videoId,
     title: item.snippet.title,
     description: item.snippet.description || '',

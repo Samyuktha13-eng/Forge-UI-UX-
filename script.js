@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
 
   // ── Gallery scroll ──────────────────────────────────────────
@@ -17,23 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => {
         const direction = button.getAttribute('data-direction') === 'next' ? 1 : -1;
         galleryTrack.scrollBy({ left: direction * 240, behavior: 'smooth' });
-      });
-    });
-  }
-
-  // ── Episode category filter ─────────────────────────────────
-  const episodeCards = document.querySelectorAll('.episode-grid .card');
-  const filterButtons = document.querySelectorAll('.episode-filter-row .filter-chip');
-  if (episodeCards.length && filterButtons.length) {
-    filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter');
-        filterButtons.forEach((chip) => chip.classList.remove('active'));
-        button.classList.add('active');
-        episodeCards.forEach((card) => {
-          const matches = filter === 'all' || card.getAttribute('data-category') === filter;
-          card.classList.toggle('is-hidden', !matches);
-        });
       });
     });
   }
@@ -98,12 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiDescription = document.getElementById('ai-description');
   const aiMeta = document.getElementById('ai-meta');
   const aiLink = document.getElementById('ai-link');
-  const aiPills = document.querySelectorAll('.ai-pill');
+
+  // Track last picked index per category to ensure variety
+  const lastPickedIndex = {};
 
   async function runMatch(goal) {
     if (!goal.trim()) return;
     const badge = matchResult ? matchResult.querySelector('.ai-badge') : null;
     if (badge) badge.textContent = 'Finding best match...';
+    if (matchResult) matchResult.hidden = false;
     if (aiTitle) aiTitle.textContent = 'Thinking...';
     if (aiDescription) aiDescription.textContent = '';
     if (aiMeta) aiMeta.textContent = '';
@@ -112,14 +104,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/api/match', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ goal })
+        body: JSON.stringify({ goal, excludeIndex: lastPickedIndex[goal] ?? -1 })
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
+      lastPickedIndex[goal] = data.pickedIndex;
       if (aiTitle) aiTitle.textContent = data.title;
       if (aiDescription) aiDescription.textContent = data.reason;
-      if (aiMeta) aiMeta.textContent = `Guest: ${data.guest} • ${data.company} • Season ${data.season} • ${data.year}`;
-      if (aiLink) { aiLink.href = data.url; aiLink.textContent = 'Watch this episode'; }
+      if (aiMeta) aiMeta.textContent = `Guest: ${data.guest} • ${data.category} • ${data.year}`;
+      if (aiLink) {
+        aiLink.href = data.url;
+        aiLink.textContent = '▶ Watch on YouTube';
+        aiLink.target = '_blank';
+        aiLink.rel = 'noreferrer';
+      }
+      // Show YouTube thumbnail in result
+      let thumb = document.getElementById('ai-thumb');
+      if (!thumb) {
+        thumb = document.createElement('img');
+        thumb.id = 'ai-thumb';
+        thumb.style.cssText = 'width:100%;border-radius:12px;margin:12px 0;aspect-ratio:16/9;object-fit:contain;background:#000;';
+        aiTitle.parentNode.insertBefore(thumb, aiTitle);
+      }
+      if (data.youtubeId) {
+        thumb.src = `https://img.youtube.com/vi/${data.youtubeId}/maxresdefault.jpg`;
+        thumb.onerror = () => { thumb.src = `https://img.youtube.com/vi/${data.youtubeId}/hqdefault.jpg`; thumb.onerror = null; };
+      }
       if (badge) badge.textContent = 'Recommended for you';
     } catch {
       if (aiTitle) aiTitle.textContent = 'Could not load recommendation.';
@@ -133,50 +143,60 @@ document.addEventListener('DOMContentLoaded', () => {
     matchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') runMatch(matchInput.value); });
   }
 
-  if (aiPills.length) {
-    aiPills.forEach((pill) => {
-      pill.addEventListener('click', () => {
-        aiPills.forEach((p) => p.classList.remove('active'));
-        pill.classList.add('active');
-        runMatch(pill.textContent.trim());
-      });
+  // ── Form feedback ───────────────────────────────────────────
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = newsletterForm.querySelector('input[type="email"]');
+      if (!input.value.trim()) return;
+      newsletterForm.innerHTML = '<p style="color:var(--accent-2);font-weight:700;margin:0">✓ You\'re subscribed! We\'ll keep you posted.</p>';
     });
-    // Auto-load first pill on podcasts page
-    if (document.querySelector('.ai-panel')) runMatch(aiPills[0].textContent.trim());
+  }
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.textContent = '✓ Message sent!';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+    });
   }
 
   // ── Dynamic episode loading from YouTube ─────────────────
   const episodeGrid = document.getElementById('episode-grid');
+  // Attach listeners to static cards immediately on load
+  attachSummaryListeners();
   if (episodeGrid) {
     fetch('/api/episodes')
       .then(r => r.json())
       .then(data => {
-        if (data.source === 'youtube' && data.episodes.length) {
-          episodeGrid.innerHTML = data.episodes.map(ep => `
-            <article class="card" data-category="${ep.category}" data-id="${ep.youtubeId}">
-              <img src="${ep.thumbnail}" alt="${ep.title}" loading="lazy" />
+        if (data.episodes && data.episodes.length) {
+          const filtered = data.episodes.filter(ep => !/\bshorts?\b/i.test(ep.title));
+          episodeGrid.innerHTML = filtered.map(ep => `
+            <article class="card" data-category="${ep.category}" data-id="${ep.youtubeId || ep.id}">
+              <img src="${ep.thumbnail || `https://img.youtube.com/vi/${ep.youtubeId}/hqdefault.jpg`}" alt="${ep.title}" loading="lazy" />
               <div class="card-content">
                 <div class="card-topline">
-                  <p class="episode-tag">${ep.category.replace('-', ' ')}</p>
+                  <p class="episode-tag">${(ep.category || 'career-growth').replace('-', ' ')}</p>
                   <span class="pill">New</span>
                 </div>
                 <h3>${ep.title}</h3>
-                <p class="meta-line">Guest: ${ep.guest} • ${new Date(ep.publishedAt).getFullYear()}</p>
-                <p>${ep.description.slice(0, 100)}${ep.description.length > 100 ? '...' : ''}</p>
+                <p class="meta-line">Guest: ${ep.guest} • ${ep.publishedAt ? new Date(ep.publishedAt).getFullYear() : 2024}</p>
+                <p>${(ep.description || '').slice(0, 100)}${(ep.description || '').length > 100 ? '...' : ''}</p>
                 <a href="${ep.url}" target="_blank" rel="noreferrer">Watch on YouTube</a>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
             </article>`).join('');
-          // Re-attach summary button listeners after dynamic render
           attachSummaryListeners();
-          // Re-attach filter listeners
           attachFilterListeners();
+        } else {
+          episodeGrid.innerHTML = '<p style="color:var(--muted);padding:32px 0;grid-column:1/-1">No episodes found. Check back soon.</p>';
         }
       })
-      .catch(() => {
-        // Static HTML fallback already in place, do nothing
-      });
+      .catch(() => {});
   }
 
   function attachFilterListeners() {
@@ -197,6 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function attachSummaryListeners() {
     document.querySelectorAll('.summary-btn').forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
       btn.addEventListener('click', async () => {
         const card = btn.closest('.card');
         const episodeId = card.getAttribute('data-id');
@@ -216,7 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({ id: episodeId })
           });
           const data = await res.json();
-          summaryBox.innerHTML = `<span class="talkie-label">TalkieAI Summary</span>${data.summary || data.error}`;
+          const formatted = (data.summary || data.error).replace(/\n/g, '<br>');
+          summaryBox.innerHTML = `<span class="talkie-label">TalkieAI Summary</span>${formatted}`;
           summaryBox.classList.add('open');
           btn.textContent = 'Hide Summary';
         } catch {

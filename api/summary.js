@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { id } = req.body;
-  if (!id) return res.status(400).json({ error: 'Episode ID is required' });
+  if (!id || typeof id !== 'string' || id.length > 100) return res.status(400).json({ error: 'Invalid episode ID' });
 
   // Look up in static data first, then YouTube cache
   let episode = podcasts.find(p => p.id === id || p.youtubeId === id);
@@ -42,14 +42,14 @@ module.exports = async (req, res) => {
       messages: [
         {
           role: 'system',
-          content: 'You are TalkieAI. Generate a concise, engaging 3-bullet summary of a podcast episode based on its metadata. Each bullet should be one sentence highlighting a key insight or takeaway. Format as plain text bullets starting with •'
+          content: 'You are TalkieAI. Given a podcast episode, write exactly 3 bullet points (•) in plain text. Each bullet must be one short sentence. Only mention: who the guest/speaker is and what specific topic or insight they discuss. No intros, no hype, no filler.'
         },
         {
           role: 'user',
-          content: `Summarize this episode:\nTitle: ${episode.title}\nGuest: ${episode.guest} from ${episode.company}\nDescription: ${episode.description}\nTags: ${episode.tags.join(', ')}`
+          content: `Episode title: ${episode.title}\nGuest: ${episode.guest}\nDescription: ${episode.description}`
         }
       ],
-      max_tokens: 180,
+      max_tokens: 120,
       temperature: 0.6
     });
 

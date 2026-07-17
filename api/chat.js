@@ -1,5 +1,6 @@
 const Groq = require('groq-sdk');
 const { siteContext, podcasts } = require('../data/podcasts');
+const rateLimit = require('./rateLimit');
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
@@ -62,6 +63,7 @@ module.exports = async (req, res) => {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (!rateLimit(req, res)) return;
 
   const { message } = req.body;
   if (!message) return res.status(400).json({ error: 'Message is required' });
