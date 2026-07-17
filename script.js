@@ -102,7 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function runMatch(goal) {
     if (!goal.trim()) return;
-    if (matchResult) matchResult.innerHTML = '<div class="ai-badge">Finding best match...</div>';
+    const badge = matchResult ? matchResult.querySelector('.ai-badge') : null;
+    if (badge) badge.textContent = 'Finding best match...';
+    if (aiTitle) aiTitle.textContent = 'Thinking...';
+    if (aiDescription) aiDescription.textContent = '';
+    if (aiMeta) aiMeta.textContent = '';
+    if (aiLink) aiLink.href = '#';
     try {
       const res = await fetch('/api/match', {
         method: 'POST',
@@ -114,10 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (aiTitle) aiTitle.textContent = data.title;
       if (aiDescription) aiDescription.textContent = data.reason;
       if (aiMeta) aiMeta.textContent = `Guest: ${data.guest} • ${data.company} • Season ${data.season} • ${data.year}`;
-      if (aiLink) aiLink.href = data.url;
-      if (matchResult) matchResult.querySelector('.ai-badge') && (matchResult.querySelector('.ai-badge').textContent = 'Recommended for you');
+      if (aiLink) { aiLink.href = data.url; aiLink.textContent = 'Watch this episode'; }
+      if (badge) badge.textContent = 'Recommended for you';
     } catch {
-      if (aiDescription) aiDescription.textContent = 'Could not load recommendation. Please try again.';
+      if (aiTitle) aiTitle.textContent = 'Could not load recommendation.';
+      if (aiDescription) aiDescription.textContent = 'Please try again or click a pill above.';
+      if (badge) badge.textContent = 'Try again';
     }
   }
 
