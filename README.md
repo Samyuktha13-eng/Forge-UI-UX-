@@ -1,3 +1,8 @@
+## 🚀 Live Demo
+
+🌐 **Deployment:** [https://forge-ui-ux.vercel.app](https://forge-ui-ux.vercel.app/)
+
+---
 # Forge UI/UX
 
 A polished, modern frontend recreation of the Talkiepedia website built as a responsive static site. The goal of this project was to preserve the original brand, content, and navigation while improving the overall user experience, information hierarchy, and visual presentation.
@@ -54,3 +59,111 @@ http://localhost:8000
 ## Notes
 
 This repository contains a static UI/UX recreation of the Talkiepedia experience for presentation, refinement, and portfolio purposes.
+
+# 🎙️ Talkiepedia – AI-Powered Podcast Learning Platform
+
+## 📖 Overview
+
+Talkiepedia is a modern podcast discovery and learning platform designed to provide users with an intuitive way to explore educational podcasts. The platform focuses on improved navigation, enhanced user experience, and AI-assisted podcast recommendations.
+
+
+
+## ✨ Features
+
+- 🏠 Clean and modern Home page
+- 📚 Dedicated About page
+- 🎧 Podcast browsing and discovery
+- 👥 Team section
+- 🖼️ Gallery section
+- 📞 Contact page
+- 🤖 AI-powered podcast recommendation system
+- 📝 AI-generated podcast summaries
+- 📱 Responsive design for desktop and mobile devices
+- 🔍 Easy navigation with improved information architecture
+
+---
+
+## 🤖 AI-Powered Feature
+
+The platform includes an **AI Podcast Recommendation System** that allows users to:
+
+- Search podcasts based on a topic or keyword.
+- Receive personalized podcast recommendations.
+- Generate AI-powered summaries before listening.
+- Discover relevant learning content more efficiently.
+
+---
+
+## 🎯 Design Improvements
+
+The redesigned interface focuses on:
+
+- Simplified navigation
+- Better content organization
+- Improved accessibility
+- Consistent visual design
+- Faster content discovery
+- Enhanced user engagement
+
+---
+
+## 🛠️ Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- Vercel (Deployment)
+
+---
+
+## 📂 Project Structure
+
+```
+project/
+│
+├── index.html
+├── about.html
+├── podcasts.html
+├── gallery.html
+├── team.html
+├── contact.html
+├── css/
+├── js/
+├── assets/
+└── README.md
+```
+
+---
+
+## 📋 Expected Deliverables Covered
+
+- ✅ User Flow / Information Architecture
+- ✅ Minimum 3 High-Fidelity Screens
+- ✅ Clean, Modern & Consistent UI
+- ✅ Improved User Experience (UX)
+- ✅ AI-Powered Podcast Recommendation Feature
+- ✅ Clickable Prototype
+- ✅ Presentation Pitch
+
+---
+
+## 🌟 Future Enhancements
+
+- User authentication
+- Save favorite podcasts
+- AI chatbot for podcast discovery
+- Voice search
+- Dark/Light mode
+- Podcast playlist management
+
+---
+
+## 👨‍💻 Developed For
+
+UI/UX Design Challenge – Talkiepedia Website Redesign
+
+---
+
+## 📄 License
+
+This project is created for educational and demonstration purposes.
