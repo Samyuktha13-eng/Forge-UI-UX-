@@ -37,6 +37,7 @@ app.use(express.static(path.join(__dirname)));
 app.post('/api/chat', require('./api/chat'));
 app.post('/api/match', require('./api/match'));
 app.post('/api/summary', require('./api/summary'));
+app.get('/api/episodes', require('./api/episodes'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Talkiepedia running at http://localhost:${PORT}`));

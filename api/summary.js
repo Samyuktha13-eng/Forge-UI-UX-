@@ -1,5 +1,6 @@
 const Groq = require('groq-sdk');
 const { podcasts } = require('../data/podcasts');
+const { fetchYouTubeVideos } = require('./episodes');
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
@@ -14,7 +15,25 @@ module.exports = async (req, res) => {
   const { id } = req.body;
   if (!id) return res.status(400).json({ error: 'Episode ID is required' });
 
-  const episode = podcasts.find(p => p.id === id);
+  // Look up in static data first, then YouTube cache
+  let episode = podcasts.find(p => p.id === id || p.youtubeId === id);
+
+  if (!episode) {
+    try {
+      const ytVideos = await fetchYouTubeVideos();
+      const yt = ytVideos.find(v => v.youtubeId === id || v.id === id);
+      if (yt) {
+        episode = {
+          title: yt.title,
+          guest: yt.guest,
+          company: 'Talkiepedia',
+          description: yt.description || yt.title,
+          tags: [yt.category]
+        };
+      }
+    } catch {}
+  }
+
   if (!episode) return res.status(404).json({ error: 'Episode not found' });
 
   try {

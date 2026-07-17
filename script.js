@@ -145,38 +145,87 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.ai-panel')) runMatch(aiPills[0].textContent.trim());
   }
 
-  // ── Episode AI Summary (podcasts page) ─────────────────────
-  document.querySelectorAll('.summary-btn').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const card = btn.closest('.card');
-      const episodeId = card.getAttribute('data-id');
-      const summaryBox = card.querySelector('.summary-box');
+  // ── Dynamic episode loading from YouTube ─────────────────
+  const episodeGrid = document.getElementById('episode-grid');
+  if (episodeGrid) {
+    fetch('/api/episodes')
+      .then(r => r.json())
+      .then(data => {
+        if (data.source === 'youtube' && data.episodes.length) {
+          episodeGrid.innerHTML = data.episodes.map(ep => `
+            <article class="card" data-category="${ep.category}" data-id="${ep.youtubeId}">
+              <img src="${ep.thumbnail}" alt="${ep.title}" loading="lazy" />
+              <div class="card-content">
+                <div class="card-topline">
+                  <p class="episode-tag">${ep.category.replace('-', ' ')}</p>
+                  <span class="pill">New</span>
+                </div>
+                <h3>${ep.title}</h3>
+                <p class="meta-line">Guest: ${ep.guest} • ${new Date(ep.publishedAt).getFullYear()}</p>
+                <p>${ep.description.slice(0, 100)}${ep.description.length > 100 ? '...' : ''}</p>
+                <a href="${ep.url}" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="summary-btn" type="button">AI Summary</button>
+                <div class="summary-box"></div>
+              </div>
+            </article>`).join('');
+          // Re-attach summary button listeners after dynamic render
+          attachSummaryListeners();
+          // Re-attach filter listeners
+          attachFilterListeners();
+        }
+      })
+      .catch(() => {
+        // Static HTML fallback already in place, do nothing
+      });
+  }
 
-      if (summaryBox.classList.contains('open')) {
-        summaryBox.classList.remove('open');
-        summaryBox.innerHTML = '';
-        btn.textContent = 'AI Summary';
-        return;
-      }
-
-      btn.textContent = 'Loading...';
-      btn.disabled = true;
-      try {
-        const res = await fetch('/api/summary', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: episodeId })
+  function attachFilterListeners() {
+    const cards = document.querySelectorAll('.episode-grid .card');
+    const filters = document.querySelectorAll('.episode-filter-row .filter-chip');
+    filters.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        filters.forEach((chip) => chip.classList.remove('active'));
+        button.classList.add('active');
+        cards.forEach((card) => {
+          const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+          card.classList.toggle('is-hidden', !matches);
         });
-        const data = await res.json();
-        summaryBox.innerHTML = `<span class="talkie-label">TalkieAI Summary</span>${data.summary || data.error}`;
-        summaryBox.classList.add('open');
-        btn.textContent = 'Hide Summary';
-      } catch {
-        summaryBox.innerHTML = '<span class="talkie-label">TalkieAI</span>Could not load summary.';
-        summaryBox.classList.add('open');
-        btn.textContent = 'Hide Summary';
-      }
-      btn.disabled = false;
+      });
     });
-  });
+  }
+
+  function attachSummaryListeners() {
+    document.querySelectorAll('.summary-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const card = btn.closest('.card');
+        const episodeId = card.getAttribute('data-id');
+        const summaryBox = card.querySelector('.summary-box');
+        if (summaryBox.classList.contains('open')) {
+          summaryBox.classList.remove('open');
+          summaryBox.innerHTML = '';
+          btn.textContent = 'AI Summary';
+          return;
+        }
+        btn.textContent = 'Loading...';
+        btn.disabled = true;
+        try {
+          const res = await fetch('/api/summary', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: episodeId })
+          });
+          const data = await res.json();
+          summaryBox.innerHTML = `<span class="talkie-label">TalkieAI Summary</span>${data.summary || data.error}`;
+          summaryBox.classList.add('open');
+          btn.textContent = 'Hide Summary';
+        } catch {
+          summaryBox.innerHTML = '<span class="talkie-label">TalkieAI</span>Could not load summary.';
+          summaryBox.classList.add('open');
+          btn.textContent = 'Hide Summary';
+        }
+        btn.disabled = false;
+      });
+    });
+  }
 });
