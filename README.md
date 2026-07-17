@@ -1,3 +1,5 @@
+# 🎙️ Talkiepedia – AI-Powered Podcast Learning Platform
+
 ## 🚀 Live Demo
 
 🌐 **Deployment:** [https://forge-ui-ux.vercel.app](https://forge-ui-ux.vercel.app/)
@@ -60,7 +62,7 @@ http://localhost:8000
 
 This repository contains a static UI/UX recreation of the Talkiepedia experience for presentation, refinement, and portfolio purposes.
 
-# 🎙️ Talkiepedia – AI-Powered Podcast Learning Platform
+
 
 ## 📖 Overview
 
