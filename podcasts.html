@@ -154,7 +154,7 @@
                 <h3>The World of Aerospace</h3>
                 <p class="meta-line">Guest: Sumanvitha KannamReddy • Season 1 • 2024</p>
                 <p>Learn how careers in aerospace open up technical and strategic opportunities.</p>
-                <a href="https://www.youtube.com/watch?v=5oZ_GtRx6S0" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="5oZ_GtRx6S0">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
@@ -169,7 +169,7 @@
                 <h3>Dream Your Career Into a Big MNC</h3>
                 <p class="meta-line">Guest: Bharat Chandra • Season 1 • 2024</p>
                 <p>An advice-driven episode on building strong career foundations in top tech companies.</p>
-                <a href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="hhckoit3fKk">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
@@ -184,7 +184,7 @@
                 <h3>Welcome to Talkiepedia</h3>
                 <p class="meta-line">Guest: Talkiepedia Team • Season 1 • 2024</p>
                 <p>A warm introduction to the show and the career-focused conversations ahead.</p>
-                <a href="https://www.youtube.com/watch?v=rsG-bZZ4vCs" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="rsG-bZZ4vCs">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
@@ -199,7 +199,7 @@
                 <h3>Guest Reveal #1: Bharat Chandra</h3>
                 <p class="meta-line">Guest: Bharat Chandra • Season 1 • 2024</p>
                 <p>Insights into campus-to-career transitions and entrepreneurship.</p>
-                <a href="https://www.youtube.com/watch?v=66OnXF2CFbo" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="66OnXF2CFbo">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
@@ -214,7 +214,7 @@
                 <h3>Why Your First Job Choice Is Probably Wrong</h3>
                 <p class="meta-line">Guest: Nikhil • Season 1 • 2024</p>
                 <p>A candid conversation with Nikhil about early-career decisions.</p>
-                <a href="https://www.youtube.com/watch?v=EuDHSBvjyTs" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="EuDHSBvjyTs">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
@@ -229,7 +229,7 @@
                 <h3>Before You Choose Your First Job</h3>
                 <p class="meta-line">Guest: Talkiepedia Team • Season 1 • 2024</p>
                 <p>Trailer for an upcoming episode focused on first-job decisions.</p>
-                <a href="https://www.youtube.com/watch?v=crGZlv2lyl0" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="crGZlv2lyl0">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
@@ -279,6 +279,31 @@
       </div>
     </footer>
 
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal" hidden>
+      <div class="video-modal-box">
+        <button class="video-modal-close" id="modal-close" aria-label="Close">&times;</button>
+        <div class="video-modal-frame">
+          <iframe id="modal-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
+    <script>
+      document.querySelectorAll('.btn-watch').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.getElementById('modal-iframe').src = 'https://www.youtube.com/embed/' + btn.getAttribute('data-id') + '?autoplay=1&rel=0';
+          document.getElementById('video-modal').hidden = false;
+        });
+      });
+      document.getElementById('modal-close').addEventListener('click', function() {
+        document.getElementById('video-modal').hidden = true;
+        document.getElementById('modal-iframe').src = '';
+      });
+      document.getElementById('video-modal').addEventListener('click', function(e) {
+        if (e.target === this) { this.hidden = true; document.getElementById('modal-iframe').src = ''; }
+      });
+    </script>
   </body>
 </html>

@@ -2,7 +2,7 @@
 
 ## 🚀 Live Demo
 
-🌐 **Deployment:** [https://forge-ui-ux.vercel.app](https://forge-ui-ux.vercel.app/)
+🌐 **Deployment:** [https://forge-ui-ux-flax.vercel.app](https://forge-ui-ux-flax.vercel.app/)
 
 ---
 # Forge UI/UX
