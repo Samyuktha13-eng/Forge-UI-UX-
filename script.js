@@ -120,23 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (aiDescription) aiDescription.textContent = data.reason;
       if (aiMeta) aiMeta.textContent = `Guest: ${data.guest} • ${data.category} • ${data.year}`;
       if (aiLink) {
-        aiLink.href = data.url;
-        aiLink.textContent = '▶ Watch on YouTube';
-        aiLink.removeAttribute('target');
-        aiLink.removeAttribute('rel');
-      }
-      // Show YouTube embed in result
-      let embedWrap = document.getElementById('ai-embed');
-      if (!embedWrap) {
-        embedWrap = document.createElement('div');
-        embedWrap.id = 'ai-embed';
-        embedWrap.style.cssText = 'width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin:12px 0;background:#000;';
-        embedWrap.innerHTML = '<iframe id="ai-embed-iframe" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        aiTitle.parentNode.insertBefore(embedWrap, aiTitle);
-      }
-      const embedIframe = document.getElementById('ai-embed-iframe');
-      if (data.youtubeId && embedIframe) {
-        embedIframe.src = `https://www.youtube.com/embed/${data.youtubeId}?rel=0&modestbranding=1`;
+        aiLink.href = '#';
+        aiLink.textContent = '▶ Watch episode';
+        aiLink.onclick = (e) => {
+          e.preventDefault();
+          const modal = document.getElementById('video-modal');
+          const iframe = document.getElementById('modal-iframe');
+          if (modal && iframe) {
+            iframe.src = `https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+            modal.hidden = false;
+          }
+        };
       }
       if (badge) badge.textContent = 'Recommended for you';
     } catch {
