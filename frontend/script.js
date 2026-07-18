@@ -107,7 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ goal, excludeIndex: lastPickedIndex[goal] ?? -1 })
       });
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      if (data.error) {
+        if (matchResult) matchResult.hidden = false;
+        if (badge) badge.textContent = '⚠️ Out of scope';
+        if (aiTitle) aiTitle.textContent = data.error;
+        if (aiDescription) aiDescription.textContent = 'Try something like: "I want to get into a big tech company" or "How do I grow my career?"';
+        if (aiMeta) aiMeta.textContent = '';
+        return;
+      }
       lastPickedIndex[goal] = data.pickedIndex;
       if (aiTitle) aiTitle.textContent = data.title;
       if (aiDescription) aiDescription.textContent = data.reason;

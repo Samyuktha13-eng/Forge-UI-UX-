@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   const { goal, excludeIndex } = req.body;
   if (!goal) return res.status(400).json({ error: 'Goal is required' });
   if (goal.length > 300) return res.status(400).json({ error: 'Input too long.' });
-  const blocked = ['ignore previous', 'ignore above', 'disregard', 'forget instructions', 'act as', 'jailbreak'];
+  const blocked = ['ignore previous', 'ignore above', 'disregard', 'forget instructions', 'act as', 'jailbreak', 'system prompt', 'you are now', 'pretend you'];
   if (blocked.some((p) => goal.toLowerCase().includes(p))) {
     return res.status(400).json({ error: 'Invalid input.' });
   }
@@ -65,7 +65,8 @@ Respond ONLY in this exact JSON format (no markdown, no extra text):
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: `My career goal or interest: ${goal}` }
+        { role: 'user', content: `My career goal or interest: ${goal}` },
+        { role: 'system', content: 'IMPORTANT: If the user input is not related to careers, jobs, skills, learning, or professional growth, respond ONLY with this exact JSON: {"index": -1, "reason": "off-topic"}' }
       ],
       max_tokens: 200,
       temperature: 0.4
@@ -81,8 +82,13 @@ Respond ONLY in this exact JSON format (no markdown, no extra text):
       match = { index: 0, reason: 'This is a great episode to start your career journey.' };
     }
 
+    // Guardrail: reject off-topic inputs
+    if (match.index === -1 || match.reason === 'off-topic') {
+      return res.status(400).json({ error: 'Please enter a career-related goal or interest to get a podcast recommendation.' });
+    }
+
     // Always use episode data from our source — never trust LLM for URLs
-    const idx = typeof match.index === 'number' && match.index < episodes.length ? match.index : 0;
+    const idx = typeof match.index === 'number' && match.index >= 0 && match.index < episodes.length ? match.index : 0;
     const episode = episodes[idx];
 
     res.status(200).json({
