@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // ── Video Modal ─────────────────────────────────────────────
+  const videoModal = document.getElementById('video-modal');
+  const modalIframe = document.getElementById('modal-iframe');
+  const modalClose = document.getElementById('modal-close');
+  if (videoModal && modalIframe && modalClose) {
+    document.querySelectorAll('.btn-watch').forEach(btn => {
+      btn.addEventListener('click', () => {
+        modalIframe.src = `https://www.youtube.com/embed/${btn.dataset.id}?autoplay=1&rel=0`;
+        videoModal.hidden = false;
+      });
+    });
+    modalClose.addEventListener('click', () => {
+      videoModal.hidden = true;
+      modalIframe.src = '';
+    });
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) { videoModal.hidden = true; modalIframe.src = ''; }
+    });
+  }
+
   // ── Nav toggle ──────────────────────────────────────────────
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.site-nav');

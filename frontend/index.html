@@ -78,7 +78,7 @@
               <div class="card-content">
                 <h3>The World of Aerospace</h3>
                 <p>Sumanvitha | Collins Aerospace</p>
-                <a href="https://www.youtube.com/watch?v=5oZ_GtRx6S0" target="_blank" rel="noreferrer">Watch episode</a>
+                <button class="btn-watch" data-id="5oZ_GtRx6S0">▶ Watch episode</button>
               </div>
             </article>
             <article class="card">
@@ -86,7 +86,7 @@
               <div class="card-content">
                 <h3>Dream Your Career Into a Big MNC</h3>
                 <p>Bharat Chandra | Microsoft</p>
-                <a href="https://www.youtube.com/watch?v=hhckoit3fKk" target="_blank" rel="noreferrer">Watch episode</a>
+                <button class="btn-watch" data-id="hhckoit3fKk">▶ Watch episode</button>
               </div>
             </article>
             <article class="card">
@@ -94,7 +94,7 @@
               <div class="card-content">
                 <h3>Navigating Corporate Success</h3>
                 <p>Dhananjay Dubey | Forge Alumnus</p>
-                <a href="https://www.youtube.com/watch?v=rsG-bZZ4vCs" target="_blank" rel="noreferrer">Watch episode</a>
+                <button class="btn-watch" data-id="rsG-bZZ4vCs">▶ Watch episode</button>
               </div>
             </article>
           </div>
@@ -169,6 +169,16 @@
         </div>
       </div>
     </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal" hidden>
+      <div class="video-modal-box">
+        <button class="video-modal-close" id="modal-close" aria-label="Close">&times;</button>
+        <div class="video-modal-frame">
+          <iframe id="modal-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
