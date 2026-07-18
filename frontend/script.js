@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const episodeGrid = document.getElementById('episode-grid');
   // Attach listeners to static cards immediately on load
   attachSummaryListeners();
+  attachWatchListeners();
   if (episodeGrid) {
     fetch('/api/episodes')
       .then(r => r.json())
@@ -185,18 +186,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${ep.title}</h3>
                 <p class="meta-line">Guest: ${ep.guest} • ${ep.publishedAt ? new Date(ep.publishedAt).getFullYear() : 2024}</p>
                 <p>${(ep.description || '').slice(0, 100)}${(ep.description || '').length > 100 ? '...' : ''}</p>
-                <a href="${ep.url}" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <button class="btn-watch" data-id="${ep.youtubeId}">▶ Watch episode</button>
                 <button class="summary-btn" type="button">AI Summary</button>
                 <div class="summary-box"></div>
               </div>
             </article>`).join('');
           attachSummaryListeners();
           attachFilterListeners();
+          attachWatchListeners();
         } else {
           episodeGrid.innerHTML = '<p style="color:var(--muted);padding:32px 0;grid-column:1/-1">No episodes found. Check back soon.</p>';
         }
       })
       .catch(() => {});
+  }
+
+  function attachWatchListeners() {
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('modal-iframe');
+    if (!modal || !iframe) return;
+    document.querySelectorAll('.btn-watch').forEach((btn) => {
+      if (btn.dataset.watchBound) return;
+      btn.dataset.watchBound = '1';
+      btn.addEventListener('click', () => {
+        iframe.src = 'https://www.youtube.com/embed/' + btn.getAttribute('data-id') + '?autoplay=1&rel=0';
+        modal.hidden = false;
+      });
+    });
   }
 
   function attachFilterListeners() {
