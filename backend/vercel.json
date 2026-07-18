@@ -4,9 +4,11 @@
     { "src": "api/*.js", "use": "@vercel/node" },
     { "src": "*.html", "use": "@vercel/static" },
     { "src": "*.css", "use": "@vercel/static" },
-    { "src": "*.js", "use": "@vercel/static" }
+    { "src": "*.js", "use": "@vercel/static" },
+    { "src": "assets/**", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
     { "src": "/about", "dest": "/about.html" },
     { "src": "/podcasts", "dest": "/podcasts.html" },

@@ -31,19 +31,19 @@ app.use('/api', (req, res, next) => {
 });
 
 app.use(express.json({ limit: '10kb' }));
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'about.html'));
+  res.sendFile(path.join(__dirname, '../frontend/about.html'));
 });
 app.get('/podcasts', (req, res) => {
-  res.sendFile(path.join(__dirname, 'podcasts.html'));
+  res.sendFile(path.join(__dirname, '../frontend/podcasts.html'));
 });
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'contact.html'));
+  res.sendFile(path.join(__dirname, '../frontend/contact.html'));
 });
 
 app.post('/api/chat', require('./api/chat'));
