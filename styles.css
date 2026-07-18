@@ -120,7 +120,9 @@ h2 { font-size: clamp(1.7rem, 2.8vw, 2.3rem); }
 .gallery-card img { height: 220px; border-radius: 0; }
 .gallery-card-content { padding: 16px; }
 .gallery-card-content h3 { margin-bottom: 6px; }
-.gallery-card-content p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.gallery-card-content p { margin: 0 0 8px; color: var(--muted); font-size: 0.95rem; }
+.gallery-li { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 700; color: #fff; background: #0a66c2; padding: 4px 10px; border-radius: 999px; transition: background 0.2s; }
+.gallery-li:hover { background: #004182; }
 
 .card-topline { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
 .pill {
