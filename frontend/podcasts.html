@@ -289,14 +289,8 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
     <script>
-      document.querySelectorAll('.btn-watch').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          document.getElementById('modal-iframe').src = 'https://www.youtube.com/embed/' + btn.getAttribute('data-id') + '?autoplay=1&rel=0';
-          document.getElementById('video-modal').hidden = false;
-        });
-      });
       document.getElementById('modal-close').addEventListener('click', function() {
         document.getElementById('video-modal').hidden = true;
         document.getElementById('modal-iframe').src = '';
