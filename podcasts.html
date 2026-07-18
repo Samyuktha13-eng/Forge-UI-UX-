@@ -289,6 +289,14 @@
       </div>
     </div>
 
+    <!-- Mini Floating Player (Matchmaker) -->
+    <div id="mini-player" class="mini-player" hidden>
+      <button class="mini-player-close" id="mini-player-close" aria-label="Close">&times;</button>
+      <div class="mini-player-frame">
+        <iframe id="mini-player-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
     <script src="script.js?v=3"></script>
     <script>
       document.getElementById('modal-close').addEventListener('click', function() {
@@ -297,6 +305,10 @@
       });
       document.getElementById('video-modal').addEventListener('click', function(e) {
         if (e.target === this) { this.hidden = true; document.getElementById('modal-iframe').src = ''; }
+      });
+      document.getElementById('mini-player-close').addEventListener('click', function() {
+        document.getElementById('mini-player').hidden = true;
+        document.getElementById('mini-player-iframe').src = '';
       });
     </script>
   </body>

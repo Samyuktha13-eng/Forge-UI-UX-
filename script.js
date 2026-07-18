@@ -124,11 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
         aiLink.textContent = '▶ Watch episode';
         aiLink.onclick = (e) => {
           e.preventDefault();
-          const modal = document.getElementById('video-modal');
-          const iframe = document.getElementById('modal-iframe');
-          if (modal && iframe) {
-            iframe.src = `https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&rel=0&modestbranding=1`;
-            modal.hidden = false;
+          const mini = document.getElementById('mini-player');
+          const miniIframe = document.getElementById('mini-player-iframe');
+          if (mini && miniIframe) {
+            miniIframe.src = `https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+            mini.hidden = false;
           }
         };
       }
