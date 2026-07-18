@@ -132,6 +132,18 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         };
       }
+      // Watch on YouTube link
+      let ytLink = document.getElementById('ai-yt-link');
+      if (!ytLink) {
+        ytLink = document.createElement('a');
+        ytLink.id = 'ai-yt-link';
+        ytLink.target = '_blank';
+        ytLink.rel = 'noreferrer';
+        ytLink.style.cssText = 'display:inline-flex;align-items:center;gap:6px;margin-top:8px;margin-left:12px;color:#fff;font-size:0.82rem;font-weight:700;background:rgba(255,0,0,0.85);padding:6px 14px;border-radius:999px;';
+        ytLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg> Watch on YouTube';
+        aiLink.parentNode.insertBefore(ytLink, aiLink.nextSibling);
+      }
+      ytLink.href = data.url;
       // Show thumbnail
       let aiThumb = document.getElementById('ai-thumb');
       if (!aiThumb) {
