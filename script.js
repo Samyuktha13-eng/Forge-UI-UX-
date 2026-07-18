@@ -132,6 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         };
       }
+      // Show thumbnail
+      let aiThumb = document.getElementById('ai-thumb');
+      if (!aiThumb) {
+        aiThumb = document.createElement('img');
+        aiThumb.id = 'ai-thumb';
+        aiThumb.style.cssText = 'width:100%;border-radius:12px;margin:12px 0;aspect-ratio:16/9;object-fit:cover;cursor:pointer;';
+        aiThumb.onclick = () => aiLink.onclick(new Event('click'));
+        aiTitle.parentNode.insertBefore(aiThumb, aiTitle);
+      }
+      aiThumb.src = `https://img.youtube.com/vi/${data.youtubeId}/hqdefault.jpg`;
+      aiThumb.alt = data.title;
       if (badge) badge.textContent = 'Recommended for you';
     } catch {
       if (aiTitle) aiTitle.textContent = 'Could not load recommendation.';
