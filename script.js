@@ -122,8 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (aiLink) {
         aiLink.href = data.url;
         aiLink.textContent = '▶ Watch on YouTube';
-        aiLink.target = '_blank';
-        aiLink.rel = 'noreferrer';
+        aiLink.removeAttribute('target');
+        aiLink.removeAttribute('rel');
       }
       // Show YouTube embed in result
       let embedWrap = document.getElementById('ai-embed');
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const embedIframe = document.getElementById('ai-embed-iframe');
       if (data.youtubeId && embedIframe) {
-        embedIframe.src = `https://www.youtube.com/embed/${data.youtubeId}?rel=0`;
+        embedIframe.src = `https://www.youtube.com/embed/${data.youtubeId}?rel=0&modestbranding=1`;
       }
       if (badge) badge.textContent = 'Recommended for you';
     } catch {
