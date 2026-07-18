@@ -181,5 +181,19 @@
     </div>
 
     <script src="script.js?v=2"></script>
+    <script>
+      document.querySelectorAll('.btn-watch').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var modal = document.getElementById('video-modal');
+          var iframe = document.getElementById('modal-iframe');
+          iframe.src = 'https://www.youtube.com/embed/' + btn.getAttribute('data-id') + '?autoplay=1&rel=0';
+          modal.hidden = false;
+        });
+      });
+      document.getElementById('modal-close').addEventListener('click', function() {
+        document.getElementById('video-modal').hidden = true;
+        document.getElementById('modal-iframe').src = '';
+      });
+    </script>
   </body>
 </html>
